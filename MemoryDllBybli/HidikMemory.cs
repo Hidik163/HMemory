@@ -132,11 +132,36 @@ namespace MemoryDllBybli
             List<Vector3> Lists = new List<Vector3>();
             for (int i = 0; i < count; i++)
             {
-                int _i = i + 12;
+                int _i = i * 12;
                 Vector3 _value = new Vector3();
                 _value.X = BitConverter.ToSingle(bytes, _i);
                 _value.Y = BitConverter.ToSingle(bytes, _i + 4);
                 _value.Z = BitConverter.ToSingle(bytes, _i + 8);
+                Lists.Add(_value);
+            }
+            return Lists;
+        }
+        //Vector2 Values
+        public Vector2 ReadVec2(nint address)
+        {
+            byte[] bytes = new byte[8];
+            NtReadVirtualMemory(Handle, address, bytes, 8, out _);
+            Vector2 _value = new Vector2();
+            _value.X = BitConverter.ToSingle(bytes, 0);
+            _value.Y = BitConverter.ToSingle(bytes, 4);
+            return _value;
+        }
+        public List<Vector2> ReadVec2(nint address, uint count)
+        {
+            byte[] bytes = new byte[count * 8];
+            NtReadVirtualMemory(Handle, address, bytes, count * 8, out _);
+            List<Vector2> Lists = new List<Vector2>();
+            for (int i = 0; i < count; i++)
+            {
+                int _i = i * 8;
+                Vector2 _value = new Vector2();
+                _value.X = BitConverter.ToSingle(bytes, _i);
+                _value.Y = BitConverter.ToSingle(bytes, _i + 4);
                 Lists.Add(_value);
             }
             return Lists;
@@ -500,6 +525,15 @@ namespace MemoryDllBybli
             buff[4] = yBytes[0]; buff[5] = yBytes[1]; buff[6] = yBytes[2]; buff[7] = yBytes[3];
             buff[8] = zBytes[0]; buff[9] = zBytes[1]; buff[10] = zBytes[2]; buff[11] = zBytes[3];
             NtWriteVirtualMemory(Handle, address, buff, 12, out _);
+        }
+        public void WriteVec2(nint address, Vector2 value)
+        {
+            byte[] buff = new byte[8];
+            byte[] xBytes = BitConverter.GetBytes(value.X);
+            byte[] yBytes = BitConverter.GetBytes(value.Y);
+            buff[0] = xBytes[0]; buff[1] = xBytes[1]; buff[2] = xBytes[2]; buff[3] = xBytes[3];
+            buff[4] = yBytes[0]; buff[5] = yBytes[1]; buff[6] = yBytes[2]; buff[7] = yBytes[3];
+            NtWriteVirtualMemory(Handle, address, buff, 8, out _);
         }
 
         //String Values (by .Foulz. and chat-gpt)
