@@ -7,6 +7,9 @@ namespace MemoryDllBybli
 {
     public class HidikMemory
     {
+        [DllImport("kernel32.dll")]
+        public static extern IntPtr OpenProcess(int fuckidk, bool a2, int processid);
+
         public nint ProcessModuleBase;
         public nint Handle;
         public HidikMemory(string name_process)
@@ -14,7 +17,7 @@ namespace MemoryDllBybli
             Process hello = Process.GetProcessesByName(name_process)[0];
             if (hello != null)
             {
-                Handle = hello.Handle;
+                Handle = OpenProcess(0x1F0FFF, false, hello.Id);
                 ProcessModuleBase = hello.MainModule.BaseAddress;
             }
             else
@@ -56,7 +59,7 @@ namespace MemoryDllBybli
         {
             Process hello = Process.GetProcessesByName(name_process)[0];
             if (hello != null)
-                return hello.Handle;
+                return OpenProcess(0x1F0FFF, false, hello.Id);
             else
                 return 0;
         }
@@ -284,18 +287,18 @@ namespace MemoryDllBybli
         //Uint Values
         public uint ReadUint(nint address)
         {
-            byte[] bytes = new byte[8];
-            NtReadVirtualMemory(Handle, address, bytes, 8, out _);
+            byte[] bytes = new byte[4];
+            NtReadVirtualMemory(Handle, address, bytes, 4, out _);
             return BitConverter.ToUInt32(bytes);
         }
         public List<uint> ReadUint(nint address, uint count)
         {
-            byte[] bytes = new byte[count * 8];
-            NtReadVirtualMemory(Handle, address, bytes, count * 8, out _);
+            byte[] bytes = new byte[count * 4];
+            NtReadVirtualMemory(Handle, address, bytes, count * 4, out _);
             List<uint> Lists = new List<uint>();
             for (int i = 0; i < count; i++)
             {
-                Lists.Add(BitConverter.ToUInt32(bytes, i * 8));
+                Lists.Add(BitConverter.ToUInt32(bytes, i * 4));
             }
             return Lists;
         }
