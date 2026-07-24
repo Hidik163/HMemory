@@ -1,4 +1,3 @@
-﻿
 using System.Diagnostics;
 using System.Numerics;
 using System.Runtime.InteropServices;
@@ -368,7 +367,7 @@ namespace MemoryDllBybli
 
 
         //Read String (by .foulz.) ////////////////////////////////////////////////////////////////////////
-        public string ReadString(nint addy)
+        private string ReadStringBase(nint addy)
         {
             StringBuilder sb = new StringBuilder();
             byte[] buff = new byte[200];
@@ -381,7 +380,7 @@ namespace MemoryDllBybli
             }
             return sb.ToString();
         }
-        public string ReadStringExplorer(IntPtr address)
+        private string ReadStringExplorer(IntPtr address)
         {
             if (address == 0) return "";
             try
@@ -407,7 +406,7 @@ namespace MemoryDllBybli
                 return "";
             }
         }
-        public string FetchString(IntPtr address)
+        public string ReadString(IntPtr address)
         {
             if (address == 0) return "";
             try
@@ -416,9 +415,9 @@ namespace MemoryDllBybli
                 if (length >= 16)
                 {
                     IntPtr padding = ReadPointer(address);
-                    return ReadString(padding);
+                    return ReadStringBase(padding);
                 }
-                return ReadString(address);
+                return ReadStringBase(address);
             }
             catch
             {
@@ -504,7 +503,7 @@ namespace MemoryDllBybli
         }
 
         //String Values (by .Foulz. and chat-gpt)
-        public bool WriteStringRaw(IntPtr address, string value)
+        private bool WriteStringRaw(IntPtr address, string value)
         {
             byte[] bytes = Encoding.ASCII.GetBytes(value + "\0");
 
@@ -535,7 +534,7 @@ namespace MemoryDllBybli
                 return WriteStringExplorer(address, value);
             }
         }
-        public bool WriteStringExplorer(IntPtr address, string value)
+        private bool WriteStringExplorer(IntPtr address, string value)
         {
             if (address == IntPtr.Zero) return false;
 
