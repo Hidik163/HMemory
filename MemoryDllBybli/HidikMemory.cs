@@ -170,30 +170,30 @@ namespace MemoryDllBybli
             return Lists;
         }
         //Matrix Values
-        public float[] ReadMatrix4x4(nint address)
+        public Matrix4x4 ReadMatrix4x4(nint address)
         {
             byte[] bytes = new byte[64];
             NtReadVirtualMemory(Handle, address, bytes, 64, out _);
-            float[] _value = new float[16];
-            _value[0] = BitConverter.ToSingle(bytes, 0);
-            _value[1] = BitConverter.ToSingle(bytes, 4);
-            _value[2] = BitConverter.ToSingle(bytes, 8);
-            _value[3] = BitConverter.ToSingle(bytes, 12);
+            Matrix4x4 _value = new Matrix4x4();
+            _value.M11 = BitConverter.ToSingle(bytes, 0);
+            _value.M12 = BitConverter.ToSingle(bytes, 4);
+            _value.M13 = BitConverter.ToSingle(bytes, 8);
+            _value.M14 = BitConverter.ToSingle(bytes, 12);
 
-            _value[4] = BitConverter.ToSingle(bytes, 16);
-            _value[5] = BitConverter.ToSingle(bytes, 20);
-            _value[6] = BitConverter.ToSingle(bytes, 24);
-            _value[7] = BitConverter.ToSingle(bytes, 28);
+            _value.M21 = BitConverter.ToSingle(bytes, 16);
+            _value.M22 = BitConverter.ToSingle(bytes, 20);
+            _value.M23 = BitConverter.ToSingle(bytes, 24);
+            _value.M24 = BitConverter.ToSingle(bytes, 28);
 
-            _value[8] = BitConverter.ToSingle(bytes, 32);
-            _value[9] = BitConverter.ToSingle(bytes, 36);
-            _value[10] = BitConverter.ToSingle(bytes, 40);
-            _value[11] = BitConverter.ToSingle(bytes, 44);
+            _value.M31 = BitConverter.ToSingle(bytes, 32);
+            _value.M32 = BitConverter.ToSingle(bytes, 36);
+            _value.M33 = BitConverter.ToSingle(bytes, 40);
+            _value.M34 = BitConverter.ToSingle(bytes, 44);
 
-            _value[12] = BitConverter.ToSingle(bytes, 48);
-            _value[13] = BitConverter.ToSingle(bytes, 52);
-            _value[14] = BitConverter.ToSingle(bytes, 56);
-            _value[15] = BitConverter.ToSingle(bytes, 60);
+            _value.M41 = BitConverter.ToSingle(bytes, 48);
+            _value.M42 = BitConverter.ToSingle(bytes, 52);
+            _value.M43 = BitConverter.ToSingle(bytes, 56);
+            _value.M44 = BitConverter.ToSingle(bytes, 60);
             return _value;
         }
         public float[] ReadMatrix3x4(nint address)
