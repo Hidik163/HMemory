@@ -12,6 +12,7 @@ namespace MemoryDllBybli
 
         public nint ProcessModuleBase;
         public nint Handle;
+        public nint GuiWindow;
         public HidikMemory(string name_process)
         {
             Process hello = Process.GetProcessesByName(name_process)[0];
@@ -19,11 +20,13 @@ namespace MemoryDllBybli
             {
                 Handle = OpenProcess(0x1F0FFF, false, hello.Id);
                 ProcessModuleBase = hello.MainModule.BaseAddress;
+                GuiWindow = hello.MainWindowHandle;
             }
             else
             {
                 Handle = 0;
                 ProcessModuleBase = 0;
+                GuiWindow = 0;
             }
         }
         [DllImport("ntdll.dll")]
