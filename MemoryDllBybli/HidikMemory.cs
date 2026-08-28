@@ -15,7 +15,7 @@ namespace MemoryDllBybli
         public nint GuiWindow;
         public HidikMemory(string name_process)
         {
-            Process hello = Process.GetProcessesByName(name_process)[0];
+            Process hello = Process.GetProcessesByName(name_process)[0];     
             if (hello != null)
             {
                 Handle = OpenProcess(0x1F0FFF, false, hello.Id);
@@ -29,23 +29,284 @@ namespace MemoryDllBybli
                 GuiWindow = 0;
             }
         }
+        //Base Read
         [DllImport("ntdll.dll")]
         private static extern int NtReadVirtualMemory(
-            IntPtr ProcessHandle,
-            IntPtr BaseAddress,
+            nint ProcessHandle,
+            nint BaseAddress,
             byte[] Buffer,
             uint NumberOfBytesToRead,
             out uint NumberOfBytesReaded
         );
-
+        //Base Write
         [DllImport("ntdll.dll")]
         private static extern int NtWriteVirtualMemory(
-            IntPtr ProcessHandle,
-            IntPtr BaseAddress,
+            nint ProcessHandle,
+            nint BaseAddress,
             byte[] Buffer,
             uint NumberOfBytesToWrite,
             out uint NumberOfBytesWritten
         );
+
+
+
+
+
+
+        //nint Read
+        [DllImport("ntdll.dll")]
+        private static extern int NtReadVirtualMemory(
+            nint ProcessHandle,
+            nint BaseAddress,
+            out nint Buffer,
+            uint NumberOfBytesToRead,
+            nint NumberOfBytesRead
+        );
+        //int Read
+        [DllImport("ntdll.dll")]
+        private static extern int NtReadVirtualMemory(
+            nint ProcessHandle,
+            nint BaseAddress,
+            out int Buffer,
+            uint NumberOfBytesToRead,
+            nint NumberOfBytesRead
+        );
+        //float Read
+        [DllImport("ntdll.dll")]
+        private static extern int NtReadVirtualMemory(
+            nint ProcessHandle,
+            nint BaseAddress,
+            out float Buffer,
+            uint NumberOfBytesToRead,
+            nint NumberOfBytesRead
+        );
+        //Vector3 Read
+        [DllImport("ntdll.dll")]
+        private static extern int NtReadVirtualMemory(
+            nint ProcessHandle,
+            nint BaseAddress,
+            out Vector3 Buffer,
+            uint NumberOfBytesToRead,
+            nint NumberOfBytesRead
+        );
+        //Vector2 Read
+        [DllImport("ntdll.dll")]
+        private static extern int NtReadVirtualMemory(
+            nint ProcessHandle,
+            nint BaseAddress,
+            out Vector2 Buffer,
+            uint NumberOfBytesToRead,
+            nint NumberOfBytesRead
+        );
+        //Matrix4x4 Read
+        [DllImport("ntdll.dll")]
+        private static extern int NtReadVirtualMemory(
+            nint ProcessHandle,
+            nint BaseAddress,
+            out Matrix4x4 Buffer,
+            uint NumberOfBytesToRead,
+            nint NumberOfBytesRead
+        );
+        //Double Read
+        [DllImport("ntdll.dll")]
+        private static extern int NtReadVirtualMemory(
+            nint ProcessHandle,
+            nint BaseAddress,
+            out double Buffer,
+            uint NumberOfBytesToRead,
+            nint NumberOfBytesRead
+        );
+        //uint Read
+        [DllImport("ntdll.dll")]
+        private static extern int NtReadVirtualMemory(
+            nint ProcessHandle,
+            nint BaseAddress,
+            out uint Buffer,
+            uint NumberOfBytesToRead,
+            nint NumberOfBytesRead
+        );
+        //char Read
+        [DllImport("ntdll.dll")]
+        private static extern int NtReadVirtualMemory(
+            nint ProcessHandle,
+            nint BaseAddress,
+            out char Buffer,
+            uint NumberOfBytesToRead,
+            nint NumberOfBytesRead
+        );
+        //short Read
+        [DllImport("ntdll.dll")]
+        private static extern int NtReadVirtualMemory(
+            nint ProcessHandle,
+            nint BaseAddress,
+            out short Buffer,
+            uint NumberOfBytesToRead,
+            nint NumberOfBytesRead
+        );
+        //ushort Read
+        [DllImport("ntdll.dll")]
+        private static extern int NtReadVirtualMemory(
+            nint ProcessHandle,
+            nint BaseAddress,
+            out ushort Buffer,
+            uint NumberOfBytesToRead,
+            nint NumberOfBytesRead
+        );
+        //long Read
+        [DllImport("ntdll.dll")]
+        private static extern int NtReadVirtualMemory(
+            nint ProcessHandle,
+            nint BaseAddress,
+            out long Buffer,
+            uint NumberOfBytesToRead,
+            nint NumberOfBytesRead
+        );
+        //ulong Read
+        [DllImport("ntdll.dll")]
+        private static extern int NtReadVirtualMemory(
+            nint ProcessHandle,
+            nint BaseAddress,
+            out ulong Buffer,
+            uint NumberOfBytesToRead,
+            nint NumberOfBytesRead
+        );
+        //byte Read
+        [DllImport("ntdll.dll")]
+        private static extern int NtReadVirtualMemory(
+            nint ProcessHandle,
+            nint BaseAddress,
+            out byte Buffer,
+            uint NumberOfBytesToRead,
+            nint NumberOfBytesRead
+        );
+
+
+
+
+
+
+
+
+        //nint Write
+        [DllImport("ntdll.dll")]
+        private static extern int NtWriteVirtualMemory(
+            nint ProcessHandle,
+            nint BaseAddress,
+            ref nint Buffer,
+            uint NumberOfBytesToWrite,
+            uint NumberOfBytesWritten
+        );
+        //float Write
+        [DllImport("ntdll.dll")]
+        private static extern int NtWriteVirtualMemory(
+            nint ProcessHandle,
+            nint BaseAddress,
+            ref float Buffer,
+            uint NumberOfBytesToWrite,
+            uint NumberOfBytesWritten
+        );
+        //int Write
+        [DllImport("ntdll.dll")]
+        private static extern int NtWriteVirtualMemory(
+            nint ProcessHandle,
+            nint BaseAddress,
+            ref int Buffer,
+            uint NumberOfBytesToWrite,
+            uint NumberOfBytesWritten
+        );
+        //uint Write
+        [DllImport("ntdll.dll")]
+        private static extern int NtWriteVirtualMemory(
+            nint ProcessHandle,
+            nint BaseAddress,
+            ref uint Buffer,
+            uint NumberOfBytesToWrite,
+            uint NumberOfBytesWritten
+        );
+        //short Write
+        [DllImport("ntdll.dll")]
+        private static extern int NtWriteVirtualMemory(
+            nint ProcessHandle,
+            nint BaseAddress,
+            ref short Buffer,
+            uint NumberOfBytesToWrite,
+            uint NumberOfBytesWritten
+        );
+        //ushort Write
+        [DllImport("ntdll.dll")]
+        private static extern int NtWriteVirtualMemory(
+            nint ProcessHandle,
+            nint BaseAddress,
+            ref ushort Buffer,
+            uint NumberOfBytesToWrite,
+            uint NumberOfBytesWritten
+        );
+        //double Write
+        [DllImport("ntdll.dll")]
+        private static extern int NtWriteVirtualMemory(
+            nint ProcessHandle,
+            nint BaseAddress,
+            ref double Buffer,
+            uint NumberOfBytesToWrite,
+            uint NumberOfBytesWritten
+        );
+        //long Write
+        [DllImport("ntdll.dll")]
+        private static extern int NtWriteVirtualMemory(
+            nint ProcessHandle,
+            nint BaseAddress,
+            ref long Buffer,
+            uint NumberOfBytesToWrite,
+            uint NumberOfBytesWritten
+        );
+        //ulong Write
+        [DllImport("ntdll.dll")]
+        private static extern int NtWriteVirtualMemory(
+            nint ProcessHandle,
+            nint BaseAddress,
+            ref ulong Buffer,
+            uint NumberOfBytesToWrite,
+            uint NumberOfBytesWritten
+        );
+        //bool Write
+        [DllImport("ntdll.dll")]
+        private static extern int NtWriteVirtualMemory(
+            nint ProcessHandle,
+            nint BaseAddress,
+            ref bool Buffer,
+            uint NumberOfBytesToWrite,
+            uint NumberOfBytesWritten
+        );
+        //byte Write
+        [DllImport("ntdll.dll")]
+        private static extern int NtWriteVirtualMemory(
+            nint ProcessHandle,
+            nint BaseAddress,
+            ref byte Buffer,
+            uint NumberOfBytesToWrite,
+            uint NumberOfBytesWritten
+        );
+        //Vector3 Write
+        [DllImport("ntdll.dll")]
+        private static extern int NtWriteVirtualMemory(
+            nint ProcessHandle,
+            nint BaseAddress,
+            ref Vector3 Buffer,
+            uint NumberOfBytesToWrite,
+            uint NumberOfBytesWritten
+        );
+        //Vector2 Write
+        [DllImport("ntdll.dll")]
+        private static extern int NtWriteVirtualMemory(
+            nint ProcessHandle,
+            nint BaseAddress,
+            ref Vector2 Buffer,
+            uint NumberOfBytesToWrite,
+            uint NumberOfBytesWritten
+        );
+
+
+
         /////Read Fuction
 
         //ModuleBase Values
@@ -69,9 +330,8 @@ namespace MemoryDllBybli
         //Pointers Values
         public nint ReadPointer(nint address)
         {
-            byte[] bytes = new byte[8];
-            NtReadVirtualMemory(Handle, address, bytes, 8, out _);
-            return (nint)BitConverter.ToInt64(bytes);
+            NtReadVirtualMemory(Handle, address, out nint value, 8, 0);
+            return value;
         }
         public List<nint> ReadPointer(nint address, uint count)
         {
@@ -87,9 +347,8 @@ namespace MemoryDllBybli
         //Int Values
         public int ReadInt(nint address)
         {
-            byte[] bytes = new byte[4];
-            NtReadVirtualMemory(Handle, address, bytes, 4, out _);
-            return BitConverter.ToInt32(bytes);
+            NtReadVirtualMemory(Handle, address, out int value, 4, 0);
+            return value;
         }
         public List<int> ReadInt(nint address, uint count)
         {
@@ -105,9 +364,8 @@ namespace MemoryDllBybli
         //Float Values
         public float ReadFloat(nint address)
         {
-            byte[] bytes = new byte[4];
-            NtReadVirtualMemory(Handle, address, bytes, 4, out _);
-            return BitConverter.ToSingle(bytes);
+            NtReadVirtualMemory(Handle, address, out float value, 4, 0);
+            return value;
         }
         public List<float> ReadFloat(nint address, uint count)
         {
@@ -123,13 +381,8 @@ namespace MemoryDllBybli
         //Vector Values
         public Vector3 ReadVec(nint address)
         {
-            byte[] bytes = new byte[12];
-            NtReadVirtualMemory(Handle, address, bytes, 12, out _);
-            Vector3 _value = new Vector3();
-            _value.X = BitConverter.ToSingle(bytes, 0);
-            _value.Y = BitConverter.ToSingle(bytes, 4);
-            _value.Z = BitConverter.ToSingle(bytes, 8);
-            return _value;
+            NtReadVirtualMemory(Handle, address, out Vector3 value, 12, 0);
+            return value;
         }
         public List<Vector3> ReadVec(nint address, uint count)
         {
@@ -150,12 +403,8 @@ namespace MemoryDllBybli
         //Vector2 Values
         public Vector2 ReadVec2(nint address)
         {
-            byte[] bytes = new byte[8];
-            NtReadVirtualMemory(Handle, address, bytes, 8, out _);
-            Vector2 _value = new Vector2();
-            _value.X = BitConverter.ToSingle(bytes, 0);
-            _value.Y = BitConverter.ToSingle(bytes, 4);
-            return _value;
+            NtReadVirtualMemory(Handle, address, out Vector2 value, 8, 0);
+            return value;
         }
         public List<Vector2> ReadVec2(nint address, uint count)
         {
@@ -175,29 +424,8 @@ namespace MemoryDllBybli
         //Matrix Values
         public Matrix4x4 ReadMatrix4x4(nint address)
         {
-            byte[] bytes = new byte[64];
-            NtReadVirtualMemory(Handle, address, bytes, 64, out _);
-            Matrix4x4 _value = new Matrix4x4();
-            _value.M11 = BitConverter.ToSingle(bytes, 0);
-            _value.M12 = BitConverter.ToSingle(bytes, 4);
-            _value.M13 = BitConverter.ToSingle(bytes, 8);
-            _value.M14 = BitConverter.ToSingle(bytes, 12);
-
-            _value.M21 = BitConverter.ToSingle(bytes, 16);
-            _value.M22 = BitConverter.ToSingle(bytes, 20);
-            _value.M23 = BitConverter.ToSingle(bytes, 24);
-            _value.M24 = BitConverter.ToSingle(bytes, 28);
-
-            _value.M31 = BitConverter.ToSingle(bytes, 32);
-            _value.M32 = BitConverter.ToSingle(bytes, 36);
-            _value.M33 = BitConverter.ToSingle(bytes, 40);
-            _value.M34 = BitConverter.ToSingle(bytes, 44);
-
-            _value.M41 = BitConverter.ToSingle(bytes, 48);
-            _value.M42 = BitConverter.ToSingle(bytes, 52);
-            _value.M43 = BitConverter.ToSingle(bytes, 56);
-            _value.M44 = BitConverter.ToSingle(bytes, 60);
-            return _value;
+            NtReadVirtualMemory(Handle, address, out Matrix4x4 value, 64, 0);        
+            return value;
         }
         public float[] ReadMatrix3x4(nint address)
         {
@@ -241,9 +469,8 @@ namespace MemoryDllBybli
         //Double Values
         public double ReadDouble(nint address)
         {
-            byte[] bytes = new byte[8];
-            NtReadVirtualMemory(Handle, address, bytes, 8, out _);
-            return BitConverter.ToDouble(bytes);
+            NtReadVirtualMemory(Handle, address, out double value, 8, 0);
+            return value;
         }
         public List<double> ReadDouble(nint address, uint count)
         {
@@ -259,9 +486,8 @@ namespace MemoryDllBybli
         //Byte Values
         public byte ReadByte(nint address)
         {
-            byte[] bytes = new byte[1];
-            NtReadVirtualMemory(Handle, address, bytes, 1, out _);
-            return bytes[0];
+            NtReadVirtualMemory(Handle, address, out byte value, 1, 0);
+            return value;
         }
         public byte[] ReadByte(nint address, uint count)
         {
@@ -272,9 +498,8 @@ namespace MemoryDllBybli
         //Bool Values
         public bool ReadBool(nint address)
         {
-            byte[] bytes = new byte[1];
-            NtReadVirtualMemory(Handle, address, bytes, 1, out _);
-            return bytes[0] != 0;
+            NtReadVirtualMemory(Handle, address, out byte value, 1, 0);
+            return value != 0;
         }
         public List<bool> ReadBool(nint address, uint count)
         {
@@ -290,9 +515,8 @@ namespace MemoryDllBybli
         //Uint Values
         public uint ReadUint(nint address)
         {
-            byte[] bytes = new byte[4];
-            NtReadVirtualMemory(Handle, address, bytes, 4, out _);
-            return BitConverter.ToUInt32(bytes);
+            NtReadVirtualMemory(Handle, address, out uint value, 4, 0);
+            return value;
         }
         public List<uint> ReadUint(nint address, uint count)
         {
@@ -308,9 +532,8 @@ namespace MemoryDllBybli
         //Char Values
         public char ReadChar(nint address)
         {
-            byte[] bytes = new byte[2];
-            NtReadVirtualMemory(Handle, address, bytes, 2, out _);
-            return BitConverter.ToChar(bytes);
+            NtReadVirtualMemory(Handle, address, out char value, 2, 0);
+            return value;
         }
         public List<char> ReadChar(nint address, uint count)
         {
@@ -326,9 +549,8 @@ namespace MemoryDllBybli
         //Short Values
         public short ReadShort(nint address)
         {
-            byte[] bytes = new byte[2];
-            NtReadVirtualMemory(Handle, address, bytes, 2, out _);
-            return BitConverter.ToInt16(bytes);
+            NtReadVirtualMemory(Handle, address, out short value, 2, 0);
+            return value;
         }
         public List<short> ReadShort(nint address, uint count)
         {
@@ -344,9 +566,8 @@ namespace MemoryDllBybli
         //UShort Values
         public ushort ReadUShort(nint address)
         {
-            byte[] bytes = new byte[2];
-            NtReadVirtualMemory(Handle, address, bytes, 2, out _);
-            return BitConverter.ToUInt16(bytes);
+            NtReadVirtualMemory(Handle, address, out ushort value, 2, 0);
+            return value;
         }
         public List<ushort> ReadUShort(nint address, uint count)
         {
@@ -362,9 +583,8 @@ namespace MemoryDllBybli
         //Long Values
         public long ReadLong(nint address)
         {
-            byte[] bytes = new byte[8];
-            NtReadVirtualMemory(Handle, address, bytes, 8, out _);
-            return BitConverter.ToInt64(bytes);
+            NtReadVirtualMemory(Handle, address, out long value, 8, 0);
+            return value;
         }
         public List<long> ReadLong(nint address, uint count)
         {
@@ -380,9 +600,8 @@ namespace MemoryDllBybli
         //ULong Values
         public ulong ReadULong(nint address)
         {
-            byte[] bytes = new byte[8];
-            NtReadVirtualMemory(Handle, address, bytes, 8, out _);
-            return BitConverter.ToUInt64(bytes);
+            NtReadVirtualMemory(Handle, address, out ulong value, 8, 0);
+            return value;
         }
         public List<ulong> ReadULong(nint address, uint count)
         {
@@ -463,83 +682,71 @@ namespace MemoryDllBybli
         /////Write Function
 
 
-
+        
 
         //Pointer Values
         public void WritePointer(nint address, nint value)
         {
-            NtWriteVirtualMemory(Handle, address, BitConverter.GetBytes(value), 8, out _);
+            NtWriteVirtualMemory(Handle, address, ref value, 8, 0);
         }
         //Float Values
         public void WriteFloat(nint address, float value)
         {
-            NtWriteVirtualMemory(Handle, address, BitConverter.GetBytes(value), 4, out _);
+            NtWriteVirtualMemory(Handle, address, ref value, 4, 0);
         }
         //Int Values
         public void WriteInt(nint address, int value)
         {
-            NtWriteVirtualMemory(Handle, address, BitConverter.GetBytes(value), 4, out _);
+            NtWriteVirtualMemory(Handle, address, ref value, 4, 0);
         }
         //uint Values
         public void WriteUInt(nint address, uint value)
         {
-            NtWriteVirtualMemory(Handle, address, BitConverter.GetBytes(value), 4, out _);
+            NtWriteVirtualMemory(Handle, address, ref value, 4, 0);
         }
         //short Values
         public void WriteShort(nint address, short value)
         {
-            NtWriteVirtualMemory(Handle, address, BitConverter.GetBytes(value), 2, out _);
+            NtWriteVirtualMemory(Handle, address, ref value, 2, 0);
         }
         //ushort Values
         public void WriteUShort(nint address, ushort value)
         {
-            NtWriteVirtualMemory(Handle, address, BitConverter.GetBytes(value), 2, out _);
+            NtWriteVirtualMemory(Handle, address, ref value, 2, 0);
         }
         //double Values
         public void WriteDouble(nint address, double value)
         {
-            NtWriteVirtualMemory(Handle, address, BitConverter.GetBytes(value), 8, out _);
+            NtWriteVirtualMemory(Handle, address, ref value, 8, 0);
         }
         //long Values
         public void WriteLong(nint address, long value)
         {
-            NtWriteVirtualMemory(Handle, address, BitConverter.GetBytes(value), 8, out _);
+            NtWriteVirtualMemory(Handle, address, ref value, 8, 0);
         }
         //ulong Values
         public void WriteULong(nint address, ulong value)
         {
-            NtWriteVirtualMemory(Handle, address, BitConverter.GetBytes(value), 8, out _);
+            NtWriteVirtualMemory(Handle, address, ref value, 8, 0);
         }
         //bool Values
         public void WriteBool(nint address, bool value)
         {
-            NtWriteVirtualMemory(Handle, address, BitConverter.GetBytes(value), 1, out _);
+            NtWriteVirtualMemory(Handle, address, ref value, 1, 0);
         }
         //byte Values
         public void WriteByte(nint address, byte value)
         {
-            NtWriteVirtualMemory(Handle, address, new byte[] { value }, 1, out _);
+            NtWriteVirtualMemory(Handle, address, ref value , 1, 0);
         }
         //Vec Values
         public void WriteVec(nint address, Vector3 value)
         {
-            byte[] buff = new byte[12];
-            byte[] xBytes = BitConverter.GetBytes(value.X);
-            byte[] yBytes = BitConverter.GetBytes(value.Y);
-            byte[] zBytes = BitConverter.GetBytes(value.Z);
-            buff[0] = xBytes[0]; buff[1] = xBytes[1]; buff[2] = xBytes[2]; buff[3] = xBytes[3];
-            buff[4] = yBytes[0]; buff[5] = yBytes[1]; buff[6] = yBytes[2]; buff[7] = yBytes[3];
-            buff[8] = zBytes[0]; buff[9] = zBytes[1]; buff[10] = zBytes[2]; buff[11] = zBytes[3];
-            NtWriteVirtualMemory(Handle, address, buff, 12, out _);
+            NtWriteVirtualMemory(Handle, address, ref value, 12, 0);
         }
         public void WriteVec2(nint address, Vector2 value)
         {
-            byte[] buff = new byte[8];
-            byte[] xBytes = BitConverter.GetBytes(value.X);
-            byte[] yBytes = BitConverter.GetBytes(value.Y);
-            buff[0] = xBytes[0]; buff[1] = xBytes[1]; buff[2] = xBytes[2]; buff[3] = xBytes[3];
-            buff[4] = yBytes[0]; buff[5] = yBytes[1]; buff[6] = yBytes[2]; buff[7] = yBytes[3];
-            NtWriteVirtualMemory(Handle, address, buff, 8, out _);
+            NtWriteVirtualMemory(Handle, address, ref value, 8, 0);
         }
 
         //String Values (by .Foulz. and chat-gpt)
@@ -605,3 +812,4 @@ namespace MemoryDllBybli
         }
     }
 }
+
