@@ -333,16 +333,11 @@ namespace MemoryDllBybli
             NtReadVirtualMemory(Handle, address, out nint value, 8, 0);
             return value;
         }
-        public List<nint> ReadPointer(nint address, uint count)
+        public nint[] ReadPointer(nint address, uint count)
         {
-            byte[] bytes = new byte[count * 8];
-            NtReadVirtualMemory(Handle, address, bytes, count * 8, out _);
-            List<nint> Lists = new List<nint>();
-            for (int i = 0; i < count; i++)
-            {
-                Lists.Add((nint)BitConverter.ToInt64(bytes, i * 8));
-            }
-            return Lists;
+            nint[] pointers = new nint[count];
+            NtReadVirtualMemory(Handle, address, out pointers[0], count * 8, 0);
+            return pointers;
         }
         //Int Values
         public int ReadInt(nint address)
@@ -350,16 +345,11 @@ namespace MemoryDllBybli
             NtReadVirtualMemory(Handle, address, out int value, 4, 0);
             return value;
         }
-        public List<int> ReadInt(nint address, uint count)
+        public int[] ReadInt(nint address, uint count)
         {
-            byte[] bytes = new byte[count * 4];
-            NtReadVirtualMemory(Handle, address, bytes, count * 4, out _);
-            List<int> Lists = new List<int>();
-            for (int i = 0; i < count; i++)
-            {
-                Lists.Add(BitConverter.ToInt32(bytes, i * 4));
-            }
-            return Lists;
+            int[] pointers = new int[count];
+            NtReadVirtualMemory(Handle, address, out pointers[0], count * 4, 0);
+            return pointers;
         }
         //Float Values
         public float ReadFloat(nint address)
@@ -367,16 +357,11 @@ namespace MemoryDllBybli
             NtReadVirtualMemory(Handle, address, out float value, 4, 0);
             return value;
         }
-        public List<float> ReadFloat(nint address, uint count)
+        public float[] ReadFloat(nint address, uint count)
         {
-            byte[] bytes = new byte[count * 4];
-            NtReadVirtualMemory(Handle, address, bytes, count * 4, out _);
-            List<float> Lists = new List<float>();
-            for (int i = 0; i < count; i++)
-            {
-                Lists.Add(BitConverter.ToSingle(bytes, i * 4));
-            }
-            return Lists;
+            float[] pointers = new float[count];
+            NtReadVirtualMemory(Handle, address, out pointers[0], count * 4, 0);
+            return pointers;
         }
         //Vector Values
         public Vector3 ReadVec(nint address)
@@ -384,21 +369,11 @@ namespace MemoryDllBybli
             NtReadVirtualMemory(Handle, address, out Vector3 value, 12, 0);
             return value;
         }
-        public List<Vector3> ReadVec(nint address, uint count)
+        public Vector3[] ReadVec(nint address, uint count)
         {
-            byte[] bytes = new byte[count * 12];
-            NtReadVirtualMemory(Handle, address, bytes, count * 12, out _);
-            List<Vector3> Lists = new List<Vector3>();
-            for (int i = 0; i < count; i++)
-            {
-                int _i = i * 12;
-                Vector3 _value = new Vector3();
-                _value.X = BitConverter.ToSingle(bytes, _i);
-                _value.Y = BitConverter.ToSingle(bytes, _i + 4);
-                _value.Z = BitConverter.ToSingle(bytes, _i + 8);
-                Lists.Add(_value);
-            }
-            return Lists;
+            Vector3[] pointers = new Vector3[count];
+            NtReadVirtualMemory(Handle, address, out pointers[0], count * 12, 0);
+            return pointers;
         }
         //Vector2 Values
         public Vector2 ReadVec2(nint address)
@@ -406,20 +381,11 @@ namespace MemoryDllBybli
             NtReadVirtualMemory(Handle, address, out Vector2 value, 8, 0);
             return value;
         }
-        public List<Vector2> ReadVec2(nint address, uint count)
+        public Vector2[] ReadVec2(nint address, uint count)
         {
-            byte[] bytes = new byte[count * 8];
-            NtReadVirtualMemory(Handle, address, bytes, count * 8, out _);
-            List<Vector2> Lists = new List<Vector2>();
-            for (int i = 0; i < count; i++)
-            {
-                int _i = i * 8;
-                Vector2 _value = new Vector2();
-                _value.X = BitConverter.ToSingle(bytes, _i);
-                _value.Y = BitConverter.ToSingle(bytes, _i + 4);
-                Lists.Add(_value);
-            }
-            return Lists;
+            Vector2[] pointers = new Vector2[count];
+            NtReadVirtualMemory(Handle, address, out pointers[0], count * 8, 0);
+            return pointers;
         }
         //Matrix Values
         public Matrix4x4 ReadMatrix4x4(nint address)
@@ -429,42 +395,15 @@ namespace MemoryDllBybli
         }
         public float[] ReadMatrix3x4(nint address)
         {
-            byte[] bytes = new byte[48];
-            NtReadVirtualMemory(Handle, address, bytes, 48, out _);
-            float[] _value = new float[12];
-            _value[0] = BitConverter.ToSingle(bytes, 0);
-            _value[1] = BitConverter.ToSingle(bytes, 4);
-            _value[2] = BitConverter.ToSingle(bytes, 8);
-            _value[3] = BitConverter.ToSingle(bytes, 12);
-
-            _value[4] = BitConverter.ToSingle(bytes, 16);
-            _value[5] = BitConverter.ToSingle(bytes, 20);
-            _value[6] = BitConverter.ToSingle(bytes, 24);
-            _value[7] = BitConverter.ToSingle(bytes, 28);
-
-            _value[8] = BitConverter.ToSingle(bytes, 32);
-            _value[9] = BitConverter.ToSingle(bytes, 36);
-            _value[10] = BitConverter.ToSingle(bytes, 40);
-            _value[11] = BitConverter.ToSingle(bytes, 44);
-            return _value;
+            float[] bytes = new float[12];
+            NtReadVirtualMemory(Handle, address, out bytes[0], 48, 0); 
+            return bytes;
         }
         public float[] ReadMatrix3x3(nint address)
         {
-            byte[] bytes = new byte[36];
-            NtReadVirtualMemory(Handle, address, bytes, 36, out _);
-            float[] _value = new float[9];
-            _value[0] = BitConverter.ToSingle(bytes, 0);
-            _value[1] = BitConverter.ToSingle(bytes, 4);
-            _value[2] = BitConverter.ToSingle(bytes, 8);
-
-            _value[3] = BitConverter.ToSingle(bytes, 12);
-            _value[4] = BitConverter.ToSingle(bytes, 16);
-            _value[5] = BitConverter.ToSingle(bytes, 20);
-
-            _value[6] = BitConverter.ToSingle(bytes, 24);
-            _value[7] = BitConverter.ToSingle(bytes, 28);
-            _value[8] = BitConverter.ToSingle(bytes, 32);
-            return _value;
+            float[] bytes = new float[9];
+            NtReadVirtualMemory(Handle, address, out bytes[0], 36, 0);
+            return bytes;
         }
         //Double Values
         public double ReadDouble(nint address)
@@ -472,16 +411,11 @@ namespace MemoryDllBybli
             NtReadVirtualMemory(Handle, address, out double value, 8, 0);
             return value;
         }
-        public List<double> ReadDouble(nint address, uint count)
+        public double[] ReadDouble(nint address, uint count)
         {
-            byte[] bytes = new byte[count * 8];
-            NtReadVirtualMemory(Handle, address, bytes, count * 8, out _);
-            List<double> Lists = new List<double>();
-            for (int i = 0; i < count; i++)
-            {
-                Lists.Add(BitConverter.ToDouble(bytes, i * 8));
-            }
-            return Lists;
+            double[] pointers = new double[count];
+            NtReadVirtualMemory(Handle, address, out pointers[0], count * 8, 0);
+            return pointers;
         }
         //Byte Values
         public byte ReadByte(nint address)
@@ -518,16 +452,11 @@ namespace MemoryDllBybli
             NtReadVirtualMemory(Handle, address, out uint value, 4, 0);
             return value;
         }
-        public List<uint> ReadUint(nint address, uint count)
+        public uint[] ReadUint(nint address, uint count)
         {
-            byte[] bytes = new byte[count * 4];
-            NtReadVirtualMemory(Handle, address, bytes, count * 4, out _);
-            List<uint> Lists = new List<uint>();
-            for (int i = 0; i < count; i++)
-            {
-                Lists.Add(BitConverter.ToUInt32(bytes, i * 4));
-            }
-            return Lists;
+            uint[] pointers = new uint[count];
+            NtReadVirtualMemory(Handle, address, out pointers[0], count * 4, 0);
+            return pointers;
         }
         //Char Values
         public char ReadChar(nint address)
@@ -535,16 +464,11 @@ namespace MemoryDllBybli
             NtReadVirtualMemory(Handle, address, out char value, 2, 0);
             return value;
         }
-        public List<char> ReadChar(nint address, uint count)
+        public char[] ReadChar(nint address, uint count)
         {
-            byte[] bytes = new byte[count * 2];
-            NtReadVirtualMemory(Handle, address, bytes, count * 2, out _);
-            List<char> Lists = new List<char>();
-            for (int i = 0; i < count; i++)
-            {
-                Lists.Add(BitConverter.ToChar(bytes, i * 2));
-            }
-            return Lists;
+            char[] pointers = new char[count];
+            NtReadVirtualMemory(Handle, address, out pointers[0], count * 2, 0);
+            return pointers;
         }
         //Short Values
         public short ReadShort(nint address)
@@ -552,16 +476,11 @@ namespace MemoryDllBybli
             NtReadVirtualMemory(Handle, address, out short value, 2, 0);
             return value;
         }
-        public List<short> ReadShort(nint address, uint count)
+        public short[] ReadShort(nint address, uint count)
         {
-            byte[] bytes = new byte[count * 2];
-            NtReadVirtualMemory(Handle, address, bytes, count * 2, out _);
-            List<short> Lists = new List<short>();
-            for (int i = 0; i < count; i++)
-            {
-                Lists.Add(BitConverter.ToInt16(bytes, i * 2));
-            }
-            return Lists;
+            short[] pointers = new short[count];
+            NtReadVirtualMemory(Handle, address, out pointers[0], count * 2, 0);
+            return pointers;
         }
         //UShort Values
         public ushort ReadUShort(nint address)
@@ -569,16 +488,11 @@ namespace MemoryDllBybli
             NtReadVirtualMemory(Handle, address, out ushort value, 2, 0);
             return value;
         }
-        public List<ushort> ReadUShort(nint address, uint count)
+        public ushort[] ReadUShort(nint address, uint count)
         {
-            byte[] bytes = new byte[count * 2];
-            NtReadVirtualMemory(Handle, address, bytes, count * 2, out _);
-            List<ushort> Lists = new List<ushort>();
-            for (int i = 0; i < count; i++)
-            {
-                Lists.Add(BitConverter.ToUInt16(bytes, i * 2));
-            }
-            return Lists;
+            ushort[] pointers = new ushort[count];
+            NtReadVirtualMemory(Handle, address, out pointers[0], count * 2, 0);
+            return pointers;
         }
         //Long Values
         public long ReadLong(nint address)
@@ -586,16 +500,11 @@ namespace MemoryDllBybli
             NtReadVirtualMemory(Handle, address, out long value, 8, 0);
             return value;
         }
-        public List<long> ReadLong(nint address, uint count)
+        public long[] ReadLong(nint address, uint count)
         {
-            byte[] bytes = new byte[count * 8];
-            NtReadVirtualMemory(Handle, address, bytes, count * 8, out _);
-            List<long> Lists = new List<long>();
-            for (int i = 0; i < count; i++)
-            {
-                Lists.Add(BitConverter.ToInt64(bytes, i * 8));
-            }
-            return Lists;
+            long[] pointers = new long[count];
+            NtReadVirtualMemory(Handle, address, out pointers[0], count * 8, 0);
+            return pointers;
         }
         //ULong Values
         public ulong ReadULong(nint address)
@@ -603,16 +512,11 @@ namespace MemoryDllBybli
             NtReadVirtualMemory(Handle, address, out ulong value, 8, 0);
             return value;
         }
-        public List<ulong> ReadULong(nint address, uint count)
+        public ulong[] ReadULong(nint address, uint count)
         {
-            byte[] bytes = new byte[count * 8];
-            NtReadVirtualMemory(Handle, address, bytes, count * 8, out _);
-            List<ulong> Lists = new List<ulong>();
-            for (int i = 0; i < count; i++)
-            {
-                Lists.Add(BitConverter.ToUInt64(bytes, i * 8));
-            }
-            return Lists;
+            ulong[] pointers = new ulong[count];
+            NtReadVirtualMemory(Handle, address, out pointers[0], count * 8, 0);
+            return pointers;
         }
 
 
