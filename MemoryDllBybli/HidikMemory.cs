@@ -1,3 +1,4 @@
+
 using System.Diagnostics;
 using System.Numerics;
 using System.Runtime.InteropServices;
@@ -95,6 +96,15 @@ namespace MemoryDllBybli
             nint ProcessHandle,
             nint BaseAddress,
             out Vector2 Buffer,
+            uint NumberOfBytesToRead,
+            nint NumberOfBytesRead
+        );
+        //Vector4 Read
+        [DllImport("ntdll.dll")]
+        private static extern int NtReadVirtualMemory(
+            nint ProcessHandle,
+            nint BaseAddress,
+            out Vector4 Buffer,
             uint NumberOfBytesToRead,
             nint NumberOfBytesRead
         );
@@ -387,6 +397,12 @@ namespace MemoryDllBybli
             NtReadVirtualMemory(Handle, address, out pointers[0], count * 8, 0);
             return pointers;
         }
+        //Vector4 Values
+        public Vector4 ReadVec4(nint address)
+        {
+            NtReadVirtualMemory(Handle, address, out Vector4 value, 16, 0);
+            return value;
+        }
         //Matrix Values
         public Matrix4x4 ReadMatrix4x4(nint address)
         {
@@ -598,6 +614,11 @@ namespace MemoryDllBybli
         {
             NtWriteVirtualMemory(Handle, address, ref value, 4, 0);
         }
+        //Matrix3x3 Values
+        public void WriteMatrix3x3(nint address, float[] value)
+        {
+            NtWriteVirtualMemory(Handle, address, ref value[0], 36, 0);
+        }
         //Int Values
         public void WriteInt(nint address, int value)
         {
@@ -612,6 +633,11 @@ namespace MemoryDllBybli
         public void WriteShort(nint address, short value)
         {
             NtWriteVirtualMemory(Handle, address, ref value, 2, 0);
+        }
+        //short2 Values
+        public void WriteShort2(nint address, short[] value)
+        {
+            NtWriteVirtualMemory(Handle, address, ref value[0], 4, 0);
         }
         //ushort Values
         public void WriteUShort(nint address, ushort value)
@@ -716,4 +742,5 @@ namespace MemoryDllBybli
         }
     }
 }
+
 
